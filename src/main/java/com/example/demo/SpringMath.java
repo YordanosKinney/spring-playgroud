@@ -1,10 +1,7 @@
 package com.example.demo;
 
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -70,5 +67,24 @@ public class SpringMath {
         }
 
         return additionString;
+   }
+
+   @GetMapping("/math/volume/{lengthId}/{widthId}/{heightId}")
+   @PostMapping("/math/volume/{lengthId}/{widthId}/{heightId}")
+   @PatchMapping("/math/volume/{lengthId}/{widthId}/{heightId}")
+    public String mathVolume(
+            @PathVariable int lengthId,
+            @PathVariable int widthId,
+            @PathVariable int heightId) {
+
+       String returnVolume = "";
+       int totalVolume = 0;
+
+       if (lengthId > 0) {
+           totalVolume = lengthId * widthId * heightId;
+           returnVolume = String.format("The volume of a %s * %s * %s rectangle is = %s", lengthId, widthId, heightId, totalVolume);
+       }
+            return returnVolume;
+
    }
 }
