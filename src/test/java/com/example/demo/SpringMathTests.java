@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -25,6 +26,19 @@ public class SpringMathTests {
 		this.mvc.perform(get("/math/pi").accept(MediaType.TEXT_PLAIN))
 		.andExpect(status().isOk())
 		.andExpect(content().string("3.141592653589793"));
+	}
+
+	@Test
+	public void testingMathCalculateEndpoint() throws Exception {
+		this.mvc.perform(get("/math/calculate?operation=add&x=4&y=6"))
+				.andExpect(status().isOk());
+
+	}
+
+	@Test
+	public void testingMathSumEndpoint() throws Exception {
+		this.mvc.perform(post("/math/sum?n=7&n=9"))
+				.andExpect(status().isOk());
 	}
 
 }
